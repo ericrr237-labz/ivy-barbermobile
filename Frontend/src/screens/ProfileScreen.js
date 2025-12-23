@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable, TextInput, Button, Alert } from "react-native";
+import { View, Text, Image, Pressable, TextInput, Button, Alert, ScrollView } from "react-native";
 import { useState, useContext, useEffect} from "react";
 import * as ImagePicker from "expo-image-picker";
 import * as SecureStore from "expo-secure-store";
@@ -84,16 +84,19 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.bg }}>
-      <View style={{ padding: 20 }}>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: 20, flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
         {/* HEADER */}
-        <Text style={{ color: theme.text, fontSize: 22, fontWeight: "600", marginBottom: 20 }}>
-          Profile
-        </Text>
-
-        <Text style={{ color: theme.muted, fontSize: 14 }}>Barber</Text>
-
+        <View style={{ height:300, flexDirection:"row",gap:20,
+         }}>
+     
+  
         {/* PROFILE IMAGE */}
-        <Pressable onPress={pickImage} style={{ alignItems: "center", marginBottom: 20 }}>
+        <Pressable onPress={pickImage} style={{ alignItems: "center",alignSelf:"flex-start"
+        }}>
           <Image
             source={
               photo
@@ -105,30 +108,30 @@ export default function ProfileScreen() {
               height: 110,
               borderRadius: 55,
               backgroundColor: "#222",
+              marginBottom:20,
+              
+
             }}
           />
-          <Text style={{ color: theme.primary, marginTop: 8 }}>
-            Change Photo
-          </Text>
-        </Pressable>
-
-        {/* NAME */}
-        <Text style={{ color: theme.muted, marginBottom: 6 }}>Name</Text>
-        <TextInput
+          <TextInput
           value={name}
           onChangeText={setName}
           style={{
+            width:100,
             borderWidth: 1,
             borderColor: theme.border,
             borderRadius: 8,
             padding: 12,
             color: theme.text,
             marginBottom: 16,
+            
           }}
         />
+        </Pressable>
 
         {/* SHOP */}
-        <Text style={{ color: theme.muted, marginBottom: 6 }}>Shop Name</Text>
+        <View style={{flex:1,marginTop:18,}}>
+        <Text style={{ color: theme.muted, marginBottom: 6, }}>Shop Name</Text>
         <TextInput
           value={shop}
           onChangeText={setShop}
@@ -141,24 +144,62 @@ export default function ProfileScreen() {
             marginBottom: 24,
           }}
         />
+        
+        <Text style={{ color: theme.muted, marginBottom: 6 }}>Shop Location</Text>
+         <TextInput
+          value={shop}
+          onChangeText={setShop}
+          style={{
+            borderWidth: 1,
+            borderColor: theme.border,
+            borderRadius: 8,
+            padding: 12,
+            color: theme.text,
+            marginBottom: 24,
+          }}
+        />
+        </View>
+        </View>
+
+        {/* SERVICES*/}
+        <View style={{ flex:1, alignSelf:"center" }}>
+          <View style={{ backgroundColor:"white", height:100, borderRadius: 20, marginBottom:10,
+          width:300,
+          }}></View>
+           <View style={{ backgroundColor:"white", height:100, borderRadius: 20,marginBottom:10,
+          width:300,
+          }}></View>
+        
+
+
+
+            <View style={{marginTop:16,}}>
+          <Button title="Add Services" color={theme.primary} onPress={() => {}} />
+        </View>
+           <View>
+          <Button title="Manage Services & Prices" color={theme.primary} onPress={() => {}} />
+        </View>
+        </View>
+
+
+
+
+
 
         {/* ACTIONS */}
-        <View style={{ marginBottom: 16 }}>
-          <Button title="Manage Services & Prices" onPress={() => {}} />
-        </View>
-
-        <View style={{ marginBottom: 24 }}>
-          <Button title="Change Password" onPress={() => {}} />
-        </View>
-
         <View>
-        <Button title="Save Profile" onPress={saveProfile} />
-        </View>
+    
+        <Button title="Change Password" color={theme.primary} onPress={() => {}} />
+    
 
+        <Button title="Save Profile" color={theme.primary} onPress={saveProfile} />
+      
 
+  
         {/* LOGOUT */}
         <Button title="Logout" color="#E5484D" onPress={logout} />
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
