@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.js";
 import authMiddleware from "./middleware/auth.js";
 import bookingRoutes from "./routes/bookings.js";
 import recordRoutes from "./routes/records.js";
+import profileRoutes from "./routes/profile.js"
 
 console.log("🔥 SERVER.JS LOADED 🔥");
 
@@ -25,6 +26,7 @@ app.get("/api/health", (req, res) => {
 // Routes
 app.use("/api/auth", authRoutes);
 
+app.use("/api/profile", profileRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/records", recordRoutes);
 
